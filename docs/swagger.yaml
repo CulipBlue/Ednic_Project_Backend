@@ -111,6 +111,29 @@ definitions:
         example: true
         type: boolean
     type: object
+  internal_httpapi.StorageHealthData:
+    properties:
+      buckets:
+        additionalProperties:
+          type: string
+        type: object
+      provider:
+        example: s3-compatible
+        type: string
+    type: object
+  internal_httpapi.StorageHealthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_httpapi.StorageHealthData'
+      errors:
+        type: object
+      message:
+        example: Object storage connection is healthy
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
   internal_modules_account.ChangePasswordRequest:
     properties:
       current_password:
@@ -1131,6 +1154,24 @@ paths:
           schema:
             $ref: '#/definitions/internal_httpapi.ErrorResponse'
       summary: Database health check
+      tags:
+      - Health
+  /api/v1/health/storage:
+    get:
+      description: Verifies the API can connect to S3-compatible object storage and
+        access required buckets.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_httpapi.StorageHealthResponse'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+      summary: Object storage health check
       tags:
       - Health
   /api/v1/product-categories:

@@ -9,6 +9,11 @@ type DatabaseHealthData struct {
 	Database string `json:"database" example:"mysql"`
 }
 
+type StorageHealthData struct {
+	Provider string            `json:"provider" example:"s3-compatible"`
+	Buckets  map[string]string `json:"buckets"`
+}
+
 type AdminHealthData struct {
 	Scope string `json:"scope" example:"admin"`
 }
@@ -25,6 +30,13 @@ type DatabaseHealthResponse struct {
 	Message string             `json:"message" example:"Database connection is healthy"`
 	Data    DatabaseHealthData `json:"data"`
 	Errors  any                `json:"errors" swaggertype:"object"`
+}
+
+type StorageHealthResponse struct {
+	Success bool              `json:"success" example:"true"`
+	Message string            `json:"message" example:"Object storage connection is healthy"`
+	Data    StorageHealthData `json:"data"`
+	Errors  any               `json:"errors" swaggertype:"object"`
 }
 
 type AdminHealthResponse struct {

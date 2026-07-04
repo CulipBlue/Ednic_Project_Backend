@@ -145,3 +145,27 @@ http://localhost:9001
 ```
 
 Use `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` from `.env`.
+
+Docker Compose also creates these buckets for local development:
+
+```text
+ednic-public
+ednic-private
+```
+
+Backend object storage config uses:
+
+```text
+OBJECT_STORAGE_ENDPOINT=http://localhost:9000
+OBJECT_STORAGE_ACCESS_KEY=ednic_minio
+OBJECT_STORAGE_SECRET_KEY=<your-minio-password>
+OBJECT_STORAGE_USE_SSL=false
+OBJECT_STORAGE_PUBLIC_BUCKET=ednic-public
+OBJECT_STORAGE_PRIVATE_BUCKET=ednic-private
+```
+
+Object storage health check:
+
+```text
+GET /api/v1/health/storage
+```

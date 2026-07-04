@@ -15,19 +15,21 @@ import (
 	"github.com/CulipBlue/backend_ednic/internal/modules/auth"
 	"github.com/CulipBlue/backend_ednic/internal/modules/products"
 	"github.com/CulipBlue/backend_ednic/internal/shared/response"
+	"github.com/CulipBlue/backend_ednic/internal/storage"
 )
 
 type Server struct {
-	cfg config.Config
-	db  *sql.DB
+	cfg     config.Config
+	db      *sql.DB
+	storage *storage.Client
 }
 
-func NewRouter(cfg config.Config, db *sql.DB) *gin.Engine {
+func NewRouter(cfg config.Config, db *sql.DB, storageClient *storage.Client) *gin.Engine {
 	if cfg.AppEnv == "production" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	server := Server{cfg: cfg, db: db}
+	server := Server{cfg: cfg, db: db, storage: storageClient}
 	router := gin.New()
 	_ = router.SetTrustedProxies(nil)
 	router.Use(gin.Logger(), gin.Recovery())
@@ -47,6 +49,7 @@ func NewRouter(cfg config.Config, db *sql.DB) *gin.Engine {
 
 	v1 := router.Group("/api/v1")
 	v1.GET("/health/db", server.databaseHealth)
+	v1.GET("/health/storage", server.storageHealth)
 	productHandler.RegisterPublicRoutes(v1)
 
 	authRoutes := v1.Group("/auth")
@@ -103,6 +106,31 @@ func (s Server) databaseHealth(c *gin.Context) {
 
 	response.OK(c, "Database connection is healthy", gin.H{
 		"database": "mysql",
+	})
+}
+
+// storageHealth godoc
+// @Summary Object storage health check
+// @Description Verifies the API can connect to S3-compatible object storage and access required buckets.
+// @Tags Health
+// @Produce json
+// @Success 200 {object} StorageHealthResponse
+// @Failure 503 {object} ErrorResponse
+// @Router /api/v1/health/storage [get]
+func (s Server) storageHealth(c *gin.Context) {
+	ctx, cancel := context.WithTimeout(c.Request.Context(), 3*time.Second)
+	defer cancel()
+
+	if err := s.storage.Health(ctx); err != nil {
+		response.Error(c, 503, "Object storage connection failed", gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	response.OK(c, "Object storage connection is healthy", gin.H{
+		"provider": "s3-compatible",
+		"buckets":  s.storage.Buckets(),
 	})
 }
 

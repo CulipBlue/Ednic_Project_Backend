@@ -7,6 +7,7 @@ import (
 	"github.com/CulipBlue/backend_ednic/internal/config"
 	"github.com/CulipBlue/backend_ednic/internal/database"
 	"github.com/CulipBlue/backend_ednic/internal/httpapi"
+	"github.com/CulipBlue/backend_ednic/internal/storage"
 )
 
 // @title EDNIC Backend API
@@ -26,7 +27,12 @@ func main() {
 	}
 	defer db.Close()
 
-	router := httpapi.NewRouter(cfg, db)
+	storageClient, err := storage.NewClient(cfg)
+	if err != nil {
+		log.Fatalf("failed to configure object storage: %v", err)
+	}
+
+	router := httpapi.NewRouter(cfg, db, storageClient)
 	if err := router.Run(":" + cfg.AppPort); err != nil {
 		log.Fatalf("failed to start server: %v", err)
 	}

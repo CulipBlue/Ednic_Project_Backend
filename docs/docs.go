@@ -856,6 +856,32 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/health/storage": {
+            "get": {
+                "description": "Verifies the API can connect to S3-compatible object storage and access required buckets.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Object storage health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/internal_httpapi.StorageHealthResponse"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/internal_httpapi.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/product-categories": {
             "get": {
                 "description": "Returns active product categories.",
@@ -1148,6 +1174,40 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "API is running"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "internal_httpapi.StorageHealthData": {
+            "type": "object",
+            "properties": {
+                "buckets": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "provider": {
+                    "type": "string",
+                    "example": "s3-compatible"
+                }
+            }
+        },
+        "internal_httpapi.StorageHealthResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/internal_httpapi.StorageHealthData"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Object storage connection is healthy"
                 },
                 "success": {
                     "type": "boolean",
