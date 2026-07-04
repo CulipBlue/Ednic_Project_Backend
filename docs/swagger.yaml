@@ -1,0 +1,1229 @@
+basePath: /
+definitions:
+  github_com_CulipBlue_backend_ednic_internal_modules_auth.User:
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  github_com_CulipBlue_backend_ednic_internal_modules_auth.UserSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/github_com_CulipBlue_backend_ednic_internal_modules_auth.User'
+      errors:
+        type: object
+      message:
+        example: User profile
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_httpapi.AdminHealthData:
+    properties:
+      scope:
+        example: admin
+        type: string
+    type: object
+  internal_httpapi.AdminHealthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_httpapi.AdminHealthData'
+      errors:
+        type: object
+      message:
+        example: Admin access granted
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_httpapi.DatabaseHealthData:
+    properties:
+      database:
+        example: mysql
+        type: string
+    type: object
+  internal_httpapi.DatabaseHealthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_httpapi.DatabaseHealthData'
+      errors:
+        type: object
+      message:
+        example: Database connection is healthy
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_httpapi.ErrorResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Validation failed
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  internal_httpapi.HealthData:
+    properties:
+      env:
+        example: local
+        type: string
+      service:
+        example: ednic-backend
+        type: string
+    type: object
+  internal_httpapi.HealthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_httpapi.HealthData'
+      errors:
+        type: object
+      message:
+        example: API is running
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_account.ChangePasswordRequest:
+    properties:
+      current_password:
+        type: string
+      new_password:
+        maxLength: 72
+        minLength: 8
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  internal_modules_account.ErrorResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Validation failed
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  internal_modules_account.MessageResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Password changed successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_account.ProfileResponse:
+    properties:
+      user:
+        $ref: '#/definitions/github_com_CulipBlue_backend_ednic_internal_modules_auth.User'
+    type: object
+  internal_modules_account.ProfileSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_modules_account.ProfileResponse'
+      errors:
+        type: object
+      message:
+        example: Profile updated successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_account.UpdateProfileRequest:
+    properties:
+      avatar_url:
+        maxLength: 500
+        type: string
+      bio:
+        maxLength: 500
+        type: string
+      name:
+        maxLength: 120
+        minLength: 2
+        type: string
+      phone:
+        maxLength: 40
+        type: string
+      username:
+        maxLength: 80
+        minLength: 3
+        type: string
+    required:
+    - name
+    - username
+    type: object
+  internal_modules_auth.AuthResponse:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/internal_modules_auth.User'
+    type: object
+  internal_modules_auth.AuthSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_modules_auth.AuthResponse'
+      errors:
+        type: object
+      message:
+        example: Logged in successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_auth.ErrorResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Validation failed
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  internal_modules_auth.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  internal_modules_auth.RegisterRequest:
+    properties:
+      email:
+        maxLength: 190
+        type: string
+      name:
+        maxLength: 120
+        minLength: 2
+        type: string
+      password:
+        maxLength: 72
+        minLength: 8
+        type: string
+      username:
+        maxLength: 80
+        minLength: 3
+        type: string
+    required:
+    - email
+    - name
+    - password
+    - username
+    type: object
+  internal_modules_auth.User:
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  internal_modules_products.Category:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      slug:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  internal_modules_products.CategoryListSuccessResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/internal_modules_products.Category'
+        type: array
+      errors:
+        type: object
+      message:
+        example: Categories
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_products.CategoryResponse:
+    properties:
+      category:
+        $ref: '#/definitions/internal_modules_products.Category'
+    type: object
+  internal_modules_products.CategorySuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_modules_products.CategoryResponse'
+      errors:
+        type: object
+      message:
+        example: Category
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_products.CreateCategoryRequest:
+    properties:
+      description:
+        maxLength: 500
+        type: string
+      name:
+        maxLength: 120
+        minLength: 2
+        type: string
+      slug:
+        maxLength: 140
+        minLength: 2
+        type: string
+      status:
+        enum:
+        - active
+        - inactive
+        type: string
+    required:
+    - name
+    - slug
+    type: object
+  internal_modules_products.CreateProductRequest:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      height_mm:
+        type: integer
+      length_mm:
+        type: integer
+      main_image_url:
+        maxLength: 500
+        type: string
+      material:
+        maxLength: 120
+        type: string
+      name:
+        maxLength: 180
+        minLength: 2
+        type: string
+      price:
+        minimum: 0
+        type: number
+      short_description:
+        maxLength: 300
+        type: string
+      sku:
+        maxLength: 80
+        type: string
+      slug:
+        maxLength: 200
+        minLength: 2
+        type: string
+      status:
+        enum:
+        - draft
+        - active
+        - inactive
+        type: string
+      stock:
+        type: integer
+      weight_gram:
+        type: integer
+      width_mm:
+        type: integer
+    required:
+    - name
+    - price
+    - slug
+    type: object
+  internal_modules_products.ErrorResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Validation failed
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  internal_modules_products.ListProductsResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/internal_modules_products.Product'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  internal_modules_products.MessageResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        example: Product deleted successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_products.Product:
+    properties:
+      category:
+        $ref: '#/definitions/internal_modules_products.Category'
+      category_id:
+        type: integer
+      created_at:
+        type: string
+      created_by:
+        type: integer
+      description:
+        type: string
+      height_mm:
+        type: integer
+      id:
+        type: integer
+      length_mm:
+        type: integer
+      main_image_url:
+        type: string
+      material:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      short_description:
+        type: string
+      sku:
+        type: string
+      slug:
+        type: string
+      status:
+        type: string
+      stock:
+        type: integer
+      updated_at:
+        type: string
+      updated_by:
+        type: integer
+      weight_gram:
+        type: integer
+      width_mm:
+        type: integer
+    type: object
+  internal_modules_products.ProductListSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_modules_products.ListProductsResponse'
+      errors:
+        type: object
+      message:
+        example: Products
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_products.ProductResponse:
+    properties:
+      product:
+        $ref: '#/definitions/internal_modules_products.Product'
+    type: object
+  internal_modules_products.ProductSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/internal_modules_products.ProductResponse'
+      errors:
+        type: object
+      message:
+        example: Product
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  internal_modules_products.UpdateCategoryRequest:
+    properties:
+      description:
+        maxLength: 500
+        type: string
+      name:
+        maxLength: 120
+        minLength: 2
+        type: string
+      slug:
+        maxLength: 140
+        minLength: 2
+        type: string
+      status:
+        enum:
+        - active
+        - inactive
+        type: string
+    required:
+    - name
+    - slug
+    type: object
+  internal_modules_products.UpdateProductRequest:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      height_mm:
+        type: integer
+      length_mm:
+        type: integer
+      main_image_url:
+        maxLength: 500
+        type: string
+      material:
+        maxLength: 120
+        type: string
+      name:
+        maxLength: 180
+        minLength: 2
+        type: string
+      price:
+        minimum: 0
+        type: number
+      short_description:
+        maxLength: 300
+        type: string
+      sku:
+        maxLength: 80
+        type: string
+      slug:
+        maxLength: 200
+        minLength: 2
+        type: string
+      status:
+        enum:
+        - draft
+        - active
+        - inactive
+        type: string
+      stock:
+        type: integer
+      weight_gram:
+        type: integer
+      width_mm:
+        type: integer
+    required:
+    - name
+    - price
+    - slug
+    type: object
+info:
+  contact: {}
+  description: API documentation for EDNIC backend.
+  title: EDNIC Backend API
+  version: 0.1.0
+paths:
+  /api/v1/account/password:
+    patch:
+      consumes:
+      - application/json
+      description: Changes the authenticated user's password after validating the
+        current password.
+      parameters:
+      - description: Change password request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_account.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_account.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Change account password
+      tags:
+      - Account
+  /api/v1/account/profile:
+    get:
+      description: Returns the authenticated user's account profile.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_account.ProfileSuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get account profile
+      tags:
+      - Account
+    patch:
+      consumes:
+      - application/json
+      description: Updates the authenticated user's profile.
+      parameters:
+      - description: Update profile request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_account.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_account.ProfileSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_account.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update account profile
+      tags:
+      - Account
+  /api/v1/admin/health:
+    get:
+      description: Verifies the authenticated user has admin access.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_httpapi.AdminHealthResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Admin health check
+      tags:
+      - Admin
+  /api/v1/admin/product-categories:
+    get:
+      description: Returns all product categories including inactive categories.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.CategoryListSuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List product categories for admin
+      tags:
+      - Admin Products
+    post:
+      consumes:
+      - application/json
+      description: Creates a product category from admin panel.
+      parameters:
+      - description: Create category request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_products.CreateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.CategorySuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create product category
+      tags:
+      - Admin Products
+  /api/v1/admin/product-categories/{id}:
+    delete:
+      description: Deletes a product category from admin panel.
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete product category
+      tags:
+      - Admin Products
+    put:
+      consumes:
+      - application/json
+      description: Updates a product category from admin panel.
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update category request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_products.UpdateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.CategorySuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update product category
+      tags:
+      - Admin Products
+  /api/v1/admin/products:
+    get:
+      description: Returns products for admin including draft and inactive items.
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search keyword
+        in: query
+        name: search
+        type: string
+      - description: Status
+        in: query
+        name: status
+        type: string
+      - description: Category slug
+        in: query
+        name: category
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductListSuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List products for admin
+      tags:
+      - Admin Products
+    post:
+      consumes:
+      - application/json
+      description: Creates a product from admin panel.
+      parameters:
+      - description: Create product request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_products.CreateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create product
+      tags:
+      - Admin Products
+  /api/v1/admin/products/{id}:
+    delete:
+      description: Deletes product from admin panel.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.MessageResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete product
+      tags:
+      - Admin Products
+    get:
+      description: Returns product detail by id for admin.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get product for admin
+      tags:
+      - Admin Products
+    put:
+      consumes:
+      - application/json
+      description: Updates product from admin panel.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update product request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_products.UpdateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update product
+      tags:
+      - Admin Products
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates a user and returns a JWT access token.
+      parameters:
+      - description: Login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_auth.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_auth.AuthSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+      summary: Login user
+      tags:
+      - Auth
+  /api/v1/auth/me:
+    get:
+      description: Returns the authenticated user profile.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_CulipBlue_backend_ednic_internal_modules_auth.UserSuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get current user profile
+      tags:
+      - Auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new user account with role user.
+      parameters:
+      - description: Register request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_auth.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_auth.AuthSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_modules_auth.ErrorResponse'
+      summary: Register user
+      tags:
+      - Auth
+  /api/v1/health/db:
+    get:
+      description: Verifies the API can connect to MySQL.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_httpapi.DatabaseHealthResponse'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/internal_httpapi.ErrorResponse'
+      summary: Database health check
+      tags:
+      - Health
+  /api/v1/product-categories:
+    get:
+      description: Returns active product categories.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.CategoryListSuccessResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      summary: List public product categories
+      tags:
+      - Products
+  /api/v1/products:
+    get:
+      description: Returns active products for public catalog.
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search keyword
+        in: query
+        name: search
+        type: string
+      - description: Category slug
+        in: query
+        name: category
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductListSuccessResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      summary: List public products
+      tags:
+      - Products
+  /api/v1/products/{slug}:
+    get:
+      description: Returns active product detail by slug.
+      parameters:
+      - description: Product slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_modules_products.ProductSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_modules_products.ErrorResponse'
+      summary: Get public product detail
+      tags:
+      - Products
+  /health:
+    get:
+      description: Verifies the API process is running.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_httpapi.HealthResponse'
+      summary: API health check
+      tags:
+      - Health
+securityDefinitions:
+  BearerAuth:
+    description: 'Use format: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
