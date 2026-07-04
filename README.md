@@ -12,6 +12,12 @@ Use an existing local MySQL server, or start the Docker Compose service from the
 docker compose up -d mysql
 ```
 
+To start MySQL and MinIO together:
+
+```text
+docker compose up -d
+```
+
 2. Create local MySQL database if it does not exist:
 
 ```sql
@@ -34,7 +40,7 @@ go run ./cmd/api
 
 ## Database Migration
 
-Run migrations from the `backend` folder:
+Run migrations from the repository root:
 
 ```text
 go run ./cmd/migrate
@@ -129,3 +135,19 @@ Regenerate Swagger docs after changing API annotations:
 ```text
 swag init -g cmd/api/main.go -o docs --parseDependency --parseInternal
 ```
+
+## Local MinIO
+
+MinIO API:
+
+```text
+http://localhost:9000
+```
+
+MinIO console:
+
+```text
+http://localhost:9001
+```
+
+Use `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` from `.env`.
