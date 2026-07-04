@@ -4,24 +4,18 @@ Golang API service for EDNIC.
 
 ## Local Setup
 
-1. Prepare MySQL.
+1. Prepare MySQL locally.
 
-Use an existing local MySQL server, or start the Docker Compose service from the repository root:
-
-```text
-docker compose up -d mysql
-```
-
-To start MySQL and MinIO together:
-
-```text
-docker compose up -d
-```
-
-2. Create local MySQL database if it does not exist:
+Use your existing local MySQL server, then create the local database if it does not exist:
 
 ```sql
 CREATE DATABASE ednic_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+2. Start MinIO with Docker:
+
+```text
+docker compose up -d
 ```
 
 3. Copy environment file:
